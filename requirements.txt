@@ -1,0 +1,11 @@
+openai==1.58.1
+pypdf==5.1.0
+tqdm==4.67.1
+qdrant-client==1.12.1
+langchain==0.3.13
+langchain-text-splitters==0.3.4
+python-dotenv==1.0.1
+pytest==8.3.4
+streamlit==1.41.1
+python-pptx    # For .pptx files
+python-ppt     # For legacy .ppt files
