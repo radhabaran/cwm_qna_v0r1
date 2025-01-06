@@ -8,4 +8,3 @@ python-dotenv==1.0.1
 pytest==8.3.4
 streamlit==1.41.1
 python-pptx    # For .pptx files
-python-ppt     # For legacy .ppt files

@@ -4,7 +4,6 @@ import os
 from typing import List, Dict, Generator
 import pypdf
 from pptx import Presentation
-from python_ppt import PPTFile  # For legacy .ppt files
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from openai import OpenAI
 from tqdm import tqdm
@@ -106,29 +105,8 @@ class DocumentProcessor:
 
 
     def process_ppt(self, file_path: str) -> Generator[tuple, None, None]:
-        """Process a legacy PPT file"""
-        try:
-            ppt = PPTFile(file_path)
-            for slide_number, slide in enumerate(ppt.slides):
-                slide_text = []
-                slide_title = ""
-
-                # Extract title and text
-                for shape in slide.shapes:
-                    if shape.type == "title":
-                        slide_title = shape.text.strip()
-                    elif shape.type == "text":
-                        text = shape.text.strip()
-                        if text and text != slide_title:
-                            slide_text.append(text)
-
-                main_text = "\n".join(slide_text)
-                if main_text or slide_title:
-                    yield slide_number, main_text, slide_title
-
-        except Exception as e:
-            print(f"Error processing PPT {file_path}: {str(e)}")
-            yield from []
+        """Process a legacy PPT file using python-pptx"""
+        return self.process_pptx(file_path)  # Handle both .ppt and .pptx the same way
 
 
     def process_document(self, file_path: str) -> Generator[tuple, None, None]:
